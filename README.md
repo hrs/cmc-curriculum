@@ -19,6 +19,15 @@ This chart is available in the following formats:
 - [PNG](cmc-curriculum.png)
 - [SVG](cmc-curriculum.svg)
 
+I hope it's more helpful than it is overwhelming!
+
+- Ovals are individual classes,
+- Diamonds are schools, certifications, or hiker ratings,
+- Rectangles are events, and
+- Octogons are degrees of skill.
+
+Dotted lines are suggested, but not strictly required.
+
 ### Disclaimers
 
 I'm a member of the CMC, and I've taken a bunch of these classes, but I neither
