@@ -1,0 +1,147 @@
+strict digraph "Mountaineering" {
+  node [fontname="San Francisco"];
+
+  // Schools, certifications, and ratings
+  node [shape=diamond];
+  acs [label="Alpine\nClimbing\nSchool"];
+  alpine_scrambling [label="Alpine\nScrambling\nSchool"];
+  backpacking [label="Backpacking\nSchool"];
+  class_c [label="Class C\nRating"]
+  class_d [label="Class D\nRating"]
+  hams [label="High Altitude\nMountaineering\nSchool"];
+  hams_alpinist [label="HAMS\nAlpinist"];
+  intermediate_acs [label="Intermediate\nAlpine Climbing\nSchool"];
+  ski_mountaineering [label="Ski\nMountaineering\nSchool"];
+  wilderness_first_aid [label="Wilderness\nFirst Aid\n+ CPR/AED"];
+  wilderness_trekking_school [label="Wilderness\nTrekking\nSchool"];
+  winter_camping_school [label="Winter\nCamping\nSchool"];
+
+  // CMC Classes
+  node [shape=oval];
+  acrs [label="Advanced\nCrevasse Rescue\nSeminar"];
+  advanced_anchors [label="Advanced\nAnchors"];
+  advanced_snow [label="Advanced\nSnow"];
+  aiare_1 [label="AIARE 1"];
+  aiare_2 [label="AIARE 2"];
+  aiare_rescue [label="AIARE\nRescue"];
+  basic_anchors [label="Basic\nAnchors"];
+  basic_ice_climbing [label="Basic Ice\nClimbing"];
+  basic_rock [label="Basic\nClimbing"];
+  climbing_self_rescue_1 [label="Climbing\nSelf Rescue 1"];
+  climbing_self_rescue_2 [label="Climbing\nSelf Rescue 2"];
+  climbing_self_rescue_3 [label="Climbing\nSelf Rescue 3"];
+  ice_lead_climbing [label="Ice Lead\nClimbing"];
+  intermediate_ice_climbing [label="Intermediate\nIce Climbing"];
+  intermediate_rock [label="Intermediate\nRock Climbing"];
+  intermediate_snow [label="Intermediate\nSnow"];
+  navigation_1 [label="Navigation 1"];
+  navigation_2 [label="Navigation 2"];
+  navigation_3 [label="Navigation 3"];
+  rock_seconding [label="Rock\nSeconding"];
+  sport_lead_climbing [label="Sport Lead\nClimbing"];
+  traditional_lead_climbing [label="Traditional\nLead\nClimbing"];
+
+  // Events
+  node [shape=rectangle];
+  difficult_class_c_hike [label="Go on a\ndifficult\nC hike"];
+  acs_couloir_climb [label="Couloir\nclimb"];
+  acs_grad_climb [label="ACS grad\nclimb"];
+  class_c_hike [label="Go on a\nC hike"];
+  class_d_hike [label="Go on a\nD hike"];
+  difficult_class_d_hike [label="Go on a\ndifficult\nD hike"];
+  ten_days_on_rock [label="10 days\nclimbing\non rock"];
+
+  // Skills
+  node [shape=octagon];
+  climb_5_9 [label="Climb 5.9\nin gym"];
+  ski_black_diamond [label="Ski black\ndiamond"];
+  toprope_ice [label="Top-rope steep\nice: WI4-WI5"];
+
+  ////////////////////////////////////////
+  // Dependencies
+  ////////////////////////////////////////
+
+  wilderness_trekking_school -> backpacking;
+  wilderness_trekking_school -> winter_camping_school [style=dotted];
+
+  // Hiking classifications
+  class_c_hike -> class_c;
+  difficult_class_c_hike -> class_c;
+  wilderness_trekking_school -> class_c;
+
+  class_d_hike -> class_d;
+  difficult_class_d_hike -> class_d;
+  acs -> class_d;
+  wilderness_first_aid -> class_d;
+
+  class_c -> alpine_scrambling;
+
+  // Climbing
+  wilderness_trekking_school -> basic_rock;
+  basic_rock -> intermediate_rock;
+  intermediate_rock -> acs_grad_climb;
+
+  intermediate_rock -> advanced_anchors;
+  intermediate_rock -> basic_anchors;
+  intermediate_rock -> climbing_self_rescue_1;
+  intermediate_rock -> rock_seconding;
+  intermediate_rock -> sport_lead_climbing;
+  climbing_self_rescue_1 -> climbing_self_rescue_2 -> climbing_self_rescue_3;
+  climb_5_9 -> traditional_lead_climbing;
+  rock_seconding -> traditional_lead_climbing;
+  rock_seconding -> climbing_self_rescue_2;
+
+  // Navigation
+  wilderness_trekking_school -> navigation_1;
+  navigation_1 -> navigation_2;
+  navigation_1 -> navigation_3;
+
+  // Snow
+  wilderness_trekking_school -> intermediate_snow;
+  basic_rock -> advanced_snow;
+  intermediate_snow -> advanced_snow;
+  advanced_snow -> acs_couloir_climb;
+
+  // ACS
+  class_c -> acs_couloir_climb;
+  navigation_2 -> acs_grad_climb;
+  class_c -> acs_grad_climb;
+
+  acs_couloir_climb -> acs;
+  acs_grad_climb -> acs;
+
+  // Intermediate ACS
+  acs -> intermediate_acs;
+  basic_anchors -> intermediate_acs;
+  climbing_self_rescue_1 -> intermediate_acs;
+  rock_seconding -> intermediate_acs;
+
+  // Ice Climbing
+  intermediate_rock -> basic_ice_climbing;
+  ten_days_on_rock -> basic_ice_climbing;
+  basic_ice_climbing -> intermediate_ice_climbing;
+  basic_anchors -> intermediate_ice_climbing;
+  traditional_lead_climbing -> ice_lead_climbing;
+  toprope_ice -> ice_lead_climbing;
+  basic_anchors -> ice_lead_climbing;
+
+  // Ski Mountaineering
+  advanced_snow -> ski_mountaineering;
+  ski_black_diamond -> ski_mountaineering;
+  wilderness_first_aid -> ski_mountaineering;
+  aiare_1 -> ski_mountaineering;
+
+  // Avalanche
+  aiare_1 -> aiare_2;
+  aiare_rescue -> aiare_2;
+
+  // HAMS
+  acs -> hams;
+  basic_anchors -> hams;
+  aiare_1 -> hams [style=dotted];
+  climbing_self_rescue_1 -> hams [style=dotted];
+  hams -> hams_alpinist;
+  aiare_1 -> hams_alpinist;
+  class_d -> hams_alpinist;
+  hams -> acrs;
+}
